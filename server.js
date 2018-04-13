@@ -30,6 +30,16 @@ app.get('/api/v1/restaurants/:id/', (request, response) => {
     })
 });
 
+app.get('/api/v1/restaurant_details', (request, response) => {
+  database('restaurant_details').select()
+    .then( restaurants => {
+      response.status(200).json(restaurants);
+    })
+    .catch( error => {
+      response.status(404).json({ error });
+    })
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Restaurant App is running on ${app.get('port')}.`);
 });
