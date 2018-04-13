@@ -35,7 +35,6 @@ describe('API Routes', () => {
             response.body[0].should.have.property('restaurant_name');
             response.body[0].should.have.property('username');
             response.body[0].should.have.property('password');
-            response.body.length.should.equal(2);
           })
           .catch( err => {
             throw err;

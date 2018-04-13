@@ -8,6 +8,16 @@ const database = require('knex')(configuration);
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 
+app.get('/api/v1/restaurants', (request, response) => {
+  database('restaurants').select()
+    .then( restaurants => {
+      response.status(200).json(restaurants);
+    })
+    .catch( error => {
+      response.status(404).json({ error });
+    })
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Restaurant App is running on ${app.get('port')}.`);
 });
