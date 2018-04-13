@@ -15,7 +15,7 @@ app.get('/api/v1/restaurants', (request, response) => {
     })
     .catch( error => {
       response.status(404).json({ error });
-    })
+    });
 });
 
 app.get('/api/v1/restaurants/:id/', (request, response) => {
@@ -27,7 +27,7 @@ app.get('/api/v1/restaurants/:id/', (request, response) => {
     })
     .catch( error => {
       response.status(404).json({ error });
-    })
+    });
 });
 
 app.get('/api/v1/restaurant_details', (request, response) => {
@@ -37,7 +37,19 @@ app.get('/api/v1/restaurant_details', (request, response) => {
     })
     .catch( error => {
       response.status(404).json({ error });
+    });
+});
+
+app.get('/api/v1/restaurant_details/:id/', (request, response) => {
+  const { id } = request.params;
+
+  database('restaurant_details').where('id', id)
+    .then( restaurant => {
+      response.status(200).json(restaurant);
     })
+    .catch( error => {
+      response.status(404).json({ error });
+    });
 });
 
 app.listen(app.get('port'), () => {
