@@ -40,6 +40,18 @@ app.get('/api/v1/restaurant_details', (request, response) => {
     });
 });
 
+app.get('/api/v1/restaurants/:id/restaurant_details', (request, response) => {
+  const { id } = request.params;
+
+  database('restaurant_details').where('restaurant_id', id)
+    .then( details => {
+      response.status(200).json(details);
+    })
+    .catch( error => {
+      response.status(404).json({ error });
+    });
+});
+
 app.get('/api/v1/restaurant_details/:id/', (request, response) => {
   const { id } = request.params;
 
