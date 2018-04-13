@@ -4,11 +4,12 @@ exports.seed = function(knex, Promise) {
     .then(() => knex('restaurants').del())
     .then(() => {
       return Promise.all([
-        knex('restaurants').insert({
-          restaurant_name: 'Nyssa\'s Restaurant',
-          username: 'nyssarestaurant',
-          password: 'password123'
-        }, 'id')
+        knex('restaurants').insert(
+          {
+            restaurant_name: 'Nyssa\'s Restaurant',
+            username: 'nyssarestaurant',
+            password: 'password123'
+          }, 'id')
         .then(restaurant => {
           return knex('restaurant_details').insert([
             { 
@@ -17,7 +18,7 @@ exports.seed = function(knex, Promise) {
               tables_open: '0',
               wait_time: '40 min',
               restaurant_id: restaurant[0] 
-            }
+            },
           ])
         })
         .then(restaurant_details => {
@@ -27,7 +28,7 @@ exports.seed = function(knex, Promise) {
               time: '6:00 pm',
               date: '04/24/18',
               number_of_people: '7',
-              restaurant_id: restaurant_details[0]
+              rest_id: restaurant_details[0]
             }
           ])
         })

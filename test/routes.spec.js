@@ -57,6 +57,28 @@ describe('API Routes', () => {
           });
       });
     });
+
+    describe('POST /api/v1/restaurants', () => {
+      it('add a new restaurant given the correct data', () => {
+        return chai.request(server)
+          .post('/api/v1/restaurants')
+          .send({
+            restaurant_name: 'Sweet Restaurant',
+            username: 'sweetrestaurant',
+            password: 'password939'
+          })
+          .then(response => {
+            response.should.have.status(201);
+            response.body.should.be.a('object');
+            response.body.should.have.property('restaurant_name');
+            response.body.should.have.property('username');
+            response.body.should.have.property('password');
+          })
+          .catch(err => {
+            throw err;
+          });
+      });
+    });
   });
   
   describe('RESTAURANT_DETAILS endpoints', () => {
