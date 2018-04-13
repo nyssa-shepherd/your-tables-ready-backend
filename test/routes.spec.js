@@ -77,6 +77,20 @@ describe('API Routes', () => {
             throw err;
           });
       });
+
+      it('return a specific restaurants details', () => {
+        return chai.request(server)
+          .get('/api/v1/restaurant_details/5')
+          .then( response => {
+            response.should.have.status(200);
+            response.should.be.json;
+            response.body[0].should.have.property('location');
+            response.body[0].should.have.property('phone_number');
+            response.body[0].should.have.property('tables_open');
+            response.body[0].should.have.property('wait_time');
+            response.body.length.should.equal(1);
+          })
+      });
     });
   });
 });
