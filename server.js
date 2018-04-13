@@ -18,6 +18,18 @@ app.get('/api/v1/restaurants', (request, response) => {
     })
 });
 
+app.get('/api/v1/restaurants/:id/', (request, response) => {
+  const { id } = request.params;
+
+  database('restaurants').where('id', id)
+    .then( restaurant => {
+      response.status(200).json(restaurant);
+    })
+    .catch( error => {
+      response.status(404).json({ error });
+    })
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Restaurant App is running on ${app.get('port')}.`);
 });

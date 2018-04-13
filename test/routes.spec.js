@@ -43,7 +43,7 @@ describe('API Routes', () => {
 
       it('return specific restaurant', () => {
         return chai.request(server)
-          .get('/api/v1/restaurants/1')
+          .get('/api/v1/restaurants/5')
           .then( response => {
             response.should.have.status(200);
             response.should.be.json;
