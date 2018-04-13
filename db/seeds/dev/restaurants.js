@@ -20,14 +20,14 @@ exports.seed = function(knex, Promise) {
             }
           ])
         })
-        .then(restaurant_detail => {
+        .then(restaurant_details => {
           return knex('reservations').insert([
             {
               name: 'Moana',
               time: '6:00 pm',
               date: '04/24/18',
               number_of_people: '7',
-              restaurant_id: restaurant_detail[0]
+              restaurant_id: restaurant_details[0]
             }
           ])
         })

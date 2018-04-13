@@ -9,7 +9,10 @@
     "pg": "^7.4.1"
   },
   "devDependencies": {
-    "body-parser": "^1.18.2"
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "git+https://github.com/chaijs/chai-http.git#3ea4524",
+    "mocha": "^5.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -30,7 +30,7 @@ exports.up = function(knex, Promise) {
       table.string('number_of_people');
       table.integer('restaurant_id').unsigned()
       table.foreign('restaurant_id')
-        .references('restaurants_details.id');
+        .references('restaurant_details.id');
 
       table.timestamps(true, true);
     })
