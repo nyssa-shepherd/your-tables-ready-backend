@@ -58,4 +58,25 @@ describe('API Routes', () => {
       });
     });
   });
+  
+  describe('RESTAURANT_DETAILS endpoints', () => {
+    describe('GET /api/v1/restaurant_details', () => {
+      it('return all restaurant details', () => {
+        return chai.request(server)
+          .get('/api/v1/restaurant_details')
+          .then( response => {
+            response.should.have.status(200);
+            response.should.be.json;
+            response.body.should.be.a('array');
+            response.body[0].should.have.property('location');
+            response.body[0].should.have.property('phone_number');
+            response.body[0].should.have.property('tables_open');
+            response.body[0].should.have.property('wait_time');
+          })
+          .catch( err => {
+            throw err;
+          });
+      });
+    });
+  });
 });
