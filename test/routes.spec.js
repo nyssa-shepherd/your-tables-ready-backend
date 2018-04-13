@@ -40,6 +40,22 @@ describe('API Routes', () => {
             throw err;
           });
       });
+
+      it('return specific restaurant', () => {
+        return chai.request(server)
+          .get('/api/v1/restaurants/1')
+          .then( response => {
+            response.should.have.status(200);
+            response.should.be.json;
+            response.body[0].should.have.property('restaurant_name');
+            response.body[0].should.have.property('username');
+            response.body[0].should.have.property('password');
+            response.body.length.should.equal(1);
+          })
+          .catch( err => {
+            throw err;
+          });
+      });
     });
   });
 });
