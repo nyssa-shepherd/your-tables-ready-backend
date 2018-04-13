@@ -114,5 +114,29 @@ describe('API Routes', () => {
           })
       });
     });
+
+    describe('POST /api/v1/restaurant_details', () => {
+      it('create new restaurant details when given the correct data', () => {
+        return chai.request(server)
+          .post('/api/v1/restaurant_details')
+          .send({
+            location: '123 North Street, Denver, CO 80206',
+            phone_number: '555-389-9098',
+            tables_open: '2',
+            wait_time: '0 min'
+          })
+          .then(response => {
+            response.should.have.status(201);
+            response.body.should.be.a('object');
+            response.body.should.have.property('location');
+            response.body.should.have.property('phone_number');
+            response.body.should.have.property('tables_open');
+            response.body.should.have.property('wait_time');
+          })
+          .catch(err => {
+            throw err;
+          });
+      });
+    });
   });
 });
