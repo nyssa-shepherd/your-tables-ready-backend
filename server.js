@@ -7,9 +7,12 @@ const database = require('knex')(configuration);
 
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
-app.use(cors({
-  allowedOrigins: ['localhost:3002']
-}));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 
 app.get('/api/v1/restaurants', (request, response) => {
