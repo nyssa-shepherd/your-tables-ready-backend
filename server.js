@@ -7,6 +7,10 @@ const database = require('knex')(configuration);
 
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
+app.use(cors({
+  allowedOrigins: ['localhost:3002']
+}));
+
 
 app.get('/api/v1/restaurants', (request, response) => {
   database('restaurants').select()
