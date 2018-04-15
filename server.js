@@ -83,19 +83,18 @@ app.get('/api/v1/restaurant_details/:id/', (request, response) => {
 app.post('/api/v1/restaurants', (request, response) => {
   const restaurantInfo = request.body;
 
-  for (let requiredParameter of ['username', 'password', 'restaurant_name']) {
+  for (let requiredParameter of ['restaurant_name', 'username', 'password']) {
     if (!restaurantInfo[requiredParameter]) {
       return response
         .status(422)
-        .send({ error: `Expected format: { name: <String> }. 
-          You're missing a "${requiredParameter}" property.` });
+        .send({ error: `You're missing a "${requiredParameter}" property.` });
     }
   }
 
   database('restaurants').insert(restaurantInfo, 'id')
     .then(restaurant => {
-      const { username, password, restaurant_name } = restaurantInfo;
-      response.status(201).json({ id: restaurant[0], username, password, restaurant_name });
+      const { restaurant_name, username, password } = restaurantInfo;
+      response.status(201).json({ id: restaurant[0], restaurant_name, username, password });
     })
     .catch(error => {
       response.status(500).json({ error });
