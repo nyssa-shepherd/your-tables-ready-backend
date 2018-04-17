@@ -22,6 +22,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/v1/restaurants', (request, response) => {
   database('restaurants').select()
@@ -76,6 +77,27 @@ app.get('/api/v1/restaurant_details/:id/', (request, response) => {
     })
     .catch( error => {
       response.status(404).json({ error });
+    });
+});
+
+app.post('/api/v1/restaurants', (request, response) => {
+  const restaurantInfo = request.body;
+
+  for (let requiredParameter of ['restaurant_name', 'username', 'password']) {
+    if (!restaurantInfo[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  database('restaurants').insert(restaurantInfo, 'id')
+    .then(restaurant => {
+      const { restaurant_name, username, password } = restaurantInfo;
+      response.status(201).json({ id: restaurant[0], restaurant_name, username, password });
+    })
+    .catch(error => {
+      response.status(500).json({ error });
     });
 });
 
