@@ -6,17 +6,18 @@ exports.seed = function(knex, Promise) {
       return Promise.all([
         knex('restaurants').insert(
           {
-            restaurant_name: 'Nyssa\'s Restaurant',
-            username: 'nyssarestaurant',
+            restaurant_name: 'FNG',
+            username: 'fngrestaurant',
             password: 'password123'
           }, 'id')
         .then(restaurant => {
           return knex('restaurant_details').insert([
             { 
-              location: '432 S Denver St, Denver, CO 80202',
-              phone_number: '555-322-6094',
+              location: '3940 W 32nd Ave, Denver, CO 80212',
+              phone_number: '(303) 963-5931',
               tables_open: '0',
               wait_time: '40 min',
+              img_url: 'https://303magazine.com/wp-content/uploads/2017/04/Screen-Shot-2017-04-10-at-12.53.18-PM.png',
               restaurant_id: restaurant[0] 
             },
           ])
