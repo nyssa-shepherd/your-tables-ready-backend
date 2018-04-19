@@ -70,7 +70,7 @@ app.get('/api/v1/restaurants/:id/restaurant_details', (request, response) => {
 
 app.get('/api/v1/reservations', (request, response) => {
   database('reservations').select()
-    .then( restaurants => {
+    .then( reservations => {
       response.status(200).json(reservations);
     })
     .catch( error => {
