@@ -68,6 +68,16 @@ app.get('/api/v1/restaurants/:id/restaurant_details', (request, response) => {
     });
 });
 
+app.get('/api/v1/reservations', (request, response) => {
+  database('reservations').select()
+    .then( restaurants => {
+      response.status(200).json(reservations);
+    })
+    .catch( error => {
+      response.status(404).json({ error });
+    });
+});
+
 app.get('/api/v1/restaurant_details/:id/', (request, response) => {
   const { id } = request.params;
 
