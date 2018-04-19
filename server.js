@@ -102,7 +102,7 @@ app.post('/api/v1/restaurants', (request, response) => {
 });
 
 app.post('/api/v1/restaurants/:id/restaurant_details', (request, response) => {
-  const restaurant_id = request.params
+  const restaurant_id = request.params.id
   const restaurantInfo = request.body;
 
   for (let requiredParameter of ['location', 'phone_number', 'tables_open', 'wait_time']) {
