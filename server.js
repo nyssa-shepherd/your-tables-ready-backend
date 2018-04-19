@@ -105,7 +105,7 @@ app.post('/api/v1/restaurants/:id/restaurant_details', (request, response) => {
   const restaurant_id = request.params.id
   const restaurantInfo = request.body;
 
-  for (let requiredParameter of ['location', 'phone_number', 'tables_open', 'wait_time']) {
+  for (let requiredParameter of ['location', 'phone_number', 'tables_open', 'wait_time','restaurant_id']) {
     if (!restaurantInfo[requiredParameter]) {
       return response
         .status(422)
@@ -113,9 +113,9 @@ app.post('/api/v1/restaurants/:id/restaurant_details', (request, response) => {
     }
   }
 
-  database('restaurant_details').insert(restaurantInfo, 'id', restaurant_id)
+  database('restaurant_details').insert(restaurantInfo, 'id')
     .then(restaurant => {
-      const { location, phone_number, tables_open, wait_time } = restaurantInfo;
+      const { location, phone_number, tables_open, wait_time, restaurant_id } = restaurantInfo;
       response.status(201).json({ id: restaurant[0], restaurant_id, location, phone_number, tables_open, wait_time });
     })
     .catch(error => {
