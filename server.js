@@ -134,7 +134,6 @@ app.post('/api/v1/restaurants/:id/restaurant_details', (request, response) => {
 });
 
 app.post('/api/v1/reservations', (request, response) => {
-  const restaurant_id = request.params.restaurant_id;
   const resInfo = request.body;
 
   for (let requiredParameter of ['restaurant_id', 'name', 'date', 'time', 'number_of_people']) {
