@@ -101,6 +101,28 @@ app.post('/api/v1/restaurants', (request, response) => {
     });
 });
 
+app.post('/api/v1/restaurants/:id/restaurant_details', (request, response) => {
+  const restaurant_id = request.params
+  const restaurantInfo = request.body;
+
+  for (let requiredParameter of ['location', 'phone_number', 'tables_open', 'wait_time']) {
+    if (!restaurantInfo[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  database('restaurant_details').insert(restaurantInfo, 'id', restaurant_id)
+    .then(restaurant => {
+      const { location, phone_number, tables_open, wait_time } = restaurantInfo;
+      response.status(201).json({ id: restaurant[0], restaurant_id, location, phone_number, tables_open, wait_time });
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Restaurant App is running on ${app.get('port')}.`);
 });
