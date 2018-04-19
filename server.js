@@ -83,7 +83,7 @@ app.get('/api/v1/restaurant_details/:id/', (request, response) => {
 app.post('/api/v1/restaurants', (request, response) => {
   const restaurantInfo = request.body;
 
-  for (let requiredParameter of ['restaurant_name', 'username', 'password']) {
+  for (let requiredParameter of ['restaurant_name', 'username', 'password', 'img_url']) {
     if (!restaurantInfo[requiredParameter]) {
       return response
         .status(422)
@@ -93,8 +93,8 @@ app.post('/api/v1/restaurants', (request, response) => {
 
   database('restaurants').insert(restaurantInfo, 'id')
     .then(restaurant => {
-      const { restaurant_name, username, password } = restaurantInfo;
-      response.status(201).json({ id: restaurant[0], restaurant_name, username, password });
+      const { restaurant_name, username, password, img_url } = restaurantInfo;
+      response.status(201).json({ id: restaurant[0], restaurant_name, username, password, img_url });
     })
     .catch(error => {
       response.status(500).json({ error });

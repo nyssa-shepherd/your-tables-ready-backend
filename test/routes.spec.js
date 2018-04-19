@@ -65,7 +65,8 @@ describe('API Routes', () => {
           .send({
             restaurant_name: 'Sweet Restaurant',
             username: 'sweetrestaurant',
-            password: 'password939'
+            password: 'password939',
+            img_url: 'https://nyppagesix.files.wordpress.com/2017/04/britney-spears.jpg?quality=90&strip=all&w=618&h=410&crop=1'
           })
           .then(response => {
             response.should.have.status(201);
